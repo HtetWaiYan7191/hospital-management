@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\HTTP\Controllers\HomeController;
 use App\HTTP\Controllers\AdminController;
+use App\HTTP\Controllers\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,4 @@ Route::middleware([
 
 Route::get('/add_doctor_view', [AdminController::class, 'addView']);
 Route::post('/upload_doctor', [AdminController::class, 'upload']);
+Route::post('/appointment/add', [AppointmentController::class, 'appointmentAdd']);

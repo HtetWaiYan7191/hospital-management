@@ -15,9 +15,23 @@
             @include('admin.navbar')
             <!-- partial -->
             <div class="container-fluid page-body-wrapper">
+
+
                 <div class="container mt-10">
                     <form style="width:50%" action="{{url('/upload_doctor')}}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        
+                        <div class="mb-3">
+                            @if (session()->has('message'))
+                            <div class="alert alert-success">
+                                <button type="button" class="close" data-dismiss="alert">
+                                    x
+                                </button>
+                                {{session()->get('message')}}
+                            </div>
+                        @endif
+                        </div>
+
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control bg-black " name="name" id="name"
@@ -32,7 +46,7 @@
 
                         <div class="mb-3">
                             <label for="name" class="form-label mr-3">Speciality</label>
-                            <select class="form-select bg-black" name="speciality" aria-label="Default select example">
+                            <select class="form-select bg-black" name="speciality" aria-label="Default select example" required>
                                 <option selected>Select</option>
                                 <option value="eye">Eye</option>
                                 <option value="heart">Heart</option>
@@ -43,12 +57,12 @@
                         <div class="mb-3">
                             <label for="room" class="form-label ">Room Number</label>
                             <input type="text" class="form-control bg-black" name="room" id=""
-                                aria-describedby="" placeholder="Write The Room Number">
+                                aria-describedby="" required placeholder="Write The Room Number">
                         </div>
 
                         <div class="mb-3">
                             <label for="room" class="form-label ">Image</label>
-                            <input type="file" class="form-control" name="file" id=""
+                            <input type="file" class="form-control" name="file" id="" required
                                 aria-describedby="" >
                         </div>
 
