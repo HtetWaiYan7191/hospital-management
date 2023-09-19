@@ -20,6 +20,6 @@ class AppointmentController extends Controller
         $appointment->message = $request->message;
         $appointment->user_id = Auth::user()->id;
         $appointment->save();
-        return redirect()->back();
+    return redirect()->back()->with('message', 'Appointment successful. we will contact with you soon');
     }
 }
