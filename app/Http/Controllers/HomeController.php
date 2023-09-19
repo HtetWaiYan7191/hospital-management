@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Models\Doctor;
+use App\Models\Appointment;
 
 class HomeController extends Controller
 {
@@ -33,4 +34,30 @@ class HomeController extends Controller
             return view('user.home', compact('doctors'));
         }
     }
+
+    public function myappointment() {
+        if(Auth::id()) {
+
+            $userId = Auth::user()->id;
+            $appointments = appointment::where('user_id', $userId)->get();
+            return view('user.my_appointment', compact('appointments'));
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function appointmentCancel($id) {
+        if (Auth::id()) {
+            $appointment = Appointment::find($id);
+    
+            if ($appointment) {
+                $appointment->delete();
+            }
+    
+            return redirect()->back();
+        } else {
+            return redirect()->back();
+        }
+    }
+    
 }
