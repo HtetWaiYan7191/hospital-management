@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 use App\Models\Doctor;
+use App\Models\Appointment;
 
 
 class AdminController extends Controller
@@ -27,5 +30,11 @@ class AdminController extends Controller
         $doctor->save();
 
         return redirect()->back()->with('message', 'Doctor added successfully');
+    }
+
+    public function showAppointment() {
+        $appointments = Appointment::all();
+        $userName = Auth::user()->name;
+        return view('admin.showappointment', compact('appointments','userName'));;
     }
 }
