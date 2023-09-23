@@ -37,4 +37,20 @@ class AdminController extends Controller
         $userName = Auth::user()->name;
         return view('admin.showappointment', compact('appointments','userName'));;
     }
+
+    public function approve($id) {
+        $data = Appointment::find($id);
+        $data->status= 1;
+        $data->save();
+
+        return redirect()->back();
+    }
+
+    public function cancel($id) {
+        $data = Appointment::find($id);
+        $data->status = 0;
+        $data->save();
+
+        return redirect()->back();
+    }
 }

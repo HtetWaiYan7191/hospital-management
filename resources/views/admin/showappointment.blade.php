@@ -24,6 +24,9 @@
                             <th>Phone</th>
                             <th>Date</th>
                             <th>Doctor</th>
+                            <th>Status</th>
+                            <th>Approve</th>
+                            <th>Cancel</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,6 +37,15 @@
                                 <td>{{$appointment->phone}}</td>
                                 <td>{{$appointment->date}}</td>
                                 <td>{{$appointment->doctor}}</td>
+                                <td>
+                                  @if ($appointment->status == 0)
+                                      Progress
+                                  @else
+                                      Approve
+                                  @endif
+                              </td>
+                              <td><a href="{{url('approve', $appointment->id)}}" class="btn btn-success">Approve</a></td>
+                              <td><a href="{{url('cancel', $appointment->id)}}" class="btn btn-danger">Cancel</a></td>
                             </tr>
                         @endforeach
                     </tbody>
